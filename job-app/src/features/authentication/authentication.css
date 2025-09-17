@@ -1,0 +1,110 @@
+.auth-container{
+    width: 100%;
+    height: 100dvh;
+    background-image: url('../../assets//backgrounds/auth-cover.jpg');
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.auth-container::before{
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.384);
+   
+
+    backdrop-filter: blur(9.5px);
+    z-index: 1;
+}
+.auth-container .auth-wrapper{
+    position: relative;
+    z-index: 2;
+    width: 80%;
+    
+    display: flex;
+    flex-direction: column;
+    
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border-radius: 30px;
+    align-items: center;
+}
+.auth-container .auth-wrapper img{
+    width: 190px;
+    height: 180px;
+}
+.auth-container .auth-wrapper .form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    font-family: 'Ubuntu', sans-serif;
+    color: #F0EBD8;;
+    width: 85%;
+}
+.auth-container .auth-wrapper .form button{
+    width: 100%;
+    padding: 20px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1em;
+    border-radius: 30px;
+    margin-top: 20px;
+    outline: none;
+    border: none;
+    background-color: #2e2336;
+    color: #F0EBD8;
+}
+.auth-container .auth-wrapper .form p{
+    font-size: 0.6em;
+    text-align: center;
+}
+.auth-container .auth-wrapper .form .form-switch{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.auth-container .auth-wrapper .form h1{
+    font-size: 1.6em;
+}
+.auth-container .auth-wrapper .form .input-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+ 
+}
+.auth-container .auth-wrapper .form .input-wrapper div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+   
+}
+.auth-container .auth-wrapper .form .input-wrapper div span{
+    font-size: 0.7em;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 600;
+    color: #F0EBD8;
+}
+.auth-container .auth-wrapper .form .input-wrapper div input{
+    max-width: 100%;
+    border-radius: 30px;
+    text-indent: 10px;
+    color:#3e3e3f;
+    border: none;
+    background-color:#F0EBD8;
+    outline: none;
+    padding: 20px;
+    font-weight: 400;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 0.6em;
+       
+}

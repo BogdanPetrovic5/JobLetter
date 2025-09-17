@@ -37,8 +37,9 @@
     width: 30px;
     height: 30px;
 }
-@media only screen and (min-width:1025px) and (max-width:1400px){
+@media only screen and (min-width:1025px){
     .dynamic-nav{
+          background-color: #1e1f1f;
         width: 20%;
         height: 100%;
         position: relative;
@@ -47,8 +48,8 @@
         transform: none;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
-        border-top-right-radius: 30px;
-        border-bottom-right-radius: 30px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
        
     }
     .dynamic-nav .dynamic-nav-wrapper{

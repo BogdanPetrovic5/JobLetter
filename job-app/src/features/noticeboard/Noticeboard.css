@@ -1,7 +1,7 @@
 .noticeboard-container{
     width: 100%;
     height: calc(100% - 140px);
-    
+    background-color: #111111;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -130,6 +130,7 @@ border-radius: 30px;
     
 }
 @media only screen and (min-width:720px) and (max-width:1024px){
+    
     .noticeboard-container .noticeboard-list-wrapper{
         width: 95%;
         height: 95%;
@@ -158,13 +159,16 @@ border-radius: 30px;
         border: 1px solid #3e3e3f;
     }
 }
-@media only screen and (min-width:1025px) and (max-width:1400px){
+@media only screen and (min-width:1025px){
     .noticeboard-container{
-        width: 80%;
-        height: calc(100% - 140px);
-            
+        width:100%;
+        height: calc(100% - 80px);
+        border-bottom-left-radius: 30px;
         display: flex;
         justify-content: center;
         align-items: center;
+        background: #2E2336;
+background: linear-gradient(0deg,rgba(46, 35, 54, 1) 0%, rgba(0, 0, 0, 1) 100%);
+
     }
 }
