@@ -1,13 +1,13 @@
-import './Mobile-nav.css'
+import './Dynamic-nav.css'
 import job from '../../assets/icons/job.png'
 import profile from '../../assets/icons/profile.png'
 import search from  '../../assets/icons/search.png'
 import filters from '../../assets/icons/filters.png'
 import logo from '../../assets/icons/logo.png'
-function MobileNav(){
+function DynamicNav(){
     return (
-        <div className="mobile-nav">
-            <div className="mobile-nav-wrapper">
+        <div className="dynamic-nav">
+            <div className="dynamic-nav-wrapper">
                 <div className='logo'>
                      <img src={logo}/> <h1>JobLetter</h1>
                 </div>
@@ -32,4 +32,4 @@ function MobileNav(){
         </div>
     )
 }
-export default MobileNav
+export default DynamicNav

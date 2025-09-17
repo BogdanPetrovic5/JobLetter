@@ -1,4 +1,4 @@
-.mobile-nav{
+.dynamic-nav{
     width: 95%;
     height: 70px;
     
@@ -15,7 +15,7 @@
     justify-content: center;
     align-items: center;
 }
-.mobile-nav .mobile-nav-wrapper{
+.dynamic-nav .dynamic-nav-wrapper{
     width: 90%;
     height: 95%;
     display: flex;
@@ -24,21 +24,21 @@
     align-items: center;
     gap: 50px;
 }
-.mobile-nav .mobile-nav-wrapper div p{
+.dynamic-nav .dynamic-nav-wrapper div p{
     display: none;
 }
-.mobile-nav .mobile-nav-wrapper .logo{
+.dynamic-nav .dynamic-nav-wrapper .logo{
     display: none;
 }
-.mobile-nav .mobile-nav-wrapper input{
+.dynamic-nav .dynamic-nav-wrapper input{
     display: none;
 }
-.mobile-nav .mobile-nav-wrapper img{
+.dynamic-nav .dynamic-nav-wrapper img{
     width: 30px;
     height: 30px;
 }
 @media only screen and (min-width:1025px) and (max-width:1400px){
-    .mobile-nav{
+    .dynamic-nav{
         width: 20%;
         height: 100%;
         position: relative;
@@ -51,20 +51,20 @@
         border-bottom-right-radius: 30px;
        
     }
-    .mobile-nav .mobile-nav-wrapper{
+    .dynamic-nav .dynamic-nav-wrapper{
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
         width: 80%;
     }
-    .mobile-nav .mobile-nav-wrapper .search{
+    .dynamic-nav .dynamic-nav-wrapper .search{
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         
         gap: 10px;
     }
-    .mobile-nav .mobile-nav-wrapper .logo{
+    .dynamic-nav .dynamic-nav-wrapper .logo{
         display: flex;
         justify-content: center;
         align-items: center;
@@ -72,16 +72,16 @@
         font-size: 25px;
 
     }
-    .mobile-nav .mobile-nav-wrapper .logo h1{
+    .dynamic-nav .dynamic-nav-wrapper .logo h1{
         font-size: 0.8em;
         color: #F0EBD8;
         font-family: 'Ubuntu', sans-serif;
     }
-    .mobile-nav .mobile-nav-wrapper .logo img{
+    .dynamic-nav .dynamic-nav-wrapper .logo img{
         width: 30px;
         height: 30px;
     }
-    .mobile-nav .mobile-nav-wrapper input{
+    .dynamic-nav .dynamic-nav-wrapper input{
         display: flex;
         width: 100%;
         border-radius: 50px;
@@ -93,13 +93,13 @@
           text-indent: 10px;
          font-family: 'Ubuntu', sans-serif;
     }
-    .mobile-nav .mobile-nav-wrapper input::placeholder{
+    .dynamic-nav .dynamic-nav-wrapper input::placeholder{
         color:#F0EBD8;
         text-indent: 10px;
         font-family: 'Ubuntu', sans-serif;
         
     }
-    .mobile-nav .mobile-nav-wrapper .tab{
+    .dynamic-nav .dynamic-nav-wrapper .tab{
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -108,7 +108,7 @@
         font-family: 'Ubuntu', sans-serif;
         font-size: 25px;
     }
-    .mobile-nav .mobile-nav-wrapper .tab p{
+    .dynamic-nav .dynamic-nav-wrapper .tab p{
         display: block;
         font-size: 0.8em;
         color: #F0EBD8;
