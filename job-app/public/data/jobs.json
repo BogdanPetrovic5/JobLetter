@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "company": "TechSoft Inc.",
+    "position": "Frontend Developer",
+    "tags": ["React", "JavaScript", "Junior"],
+    "salary": "40000-50000 USD",
+    "location": "San Francisco, USA",
+    "workType": "Remote"
+  },
+  {
+    "id": 2,
+    "company": "Global Solutions",
+    "position": "Backend Engineer",
+    "tags": ["Node.js", "Express", "Mid-Level"],
+    "salary": "50000-60000 USD",
+    "location": "London, UK",
+    "workType": "Office"
+  },
+  {
+    "id": 3,
+    "company": "Innovatech",
+    "position": "Fullstack Developer",
+    "tags": ["React", "Node.js", "Mid-Level"],
+    "salary": "45000-55000 USD",
+    "location": "Berlin, Germany",
+    "workType": "Hybrid"
+  },
+  {
+    "id": 4,
+    "company": "CloudWorks",
+    "position": "DevOps Engineer",
+    "tags": ["AWS", "Docker", "Senior"],
+    "salary": "70000-85000 USD",
+    "location": "Toronto, Canada",
+    "workType": "Remote"
+  },
+  {
+    "id": 5,
+    "company": "NextGen Apps",
+    "position": "Mobile Developer",
+    "tags": ["React Native", "iOS", "Junior"],
+    "salary": "40000-50000 USD",
+    "location": "Amsterdam, Netherlands",
+    "workType": "Hybrid"
+  },
+  {
+    "id": 6,
+    "company": "CyberTech",
+    "position": "Data Scientist",
+    "tags": ["Python", "Machine Learning", "Mid-Level"],
+    "salary": "60000-70000 USD",
+    "location": "New York, USA",
+    "workType": "Office"
+  },
+  {
+    "id": 7,
+    "company": "SoftWare House",
+    "position": "UI/UX Designer",
+    "tags": ["Figma", "Adobe XD", "Junior"],
+    "salary": "35000-45000 USD",
+    "location": "Paris, France",
+    "workType": "Remote"
+  },
+  {
+    "id": 8,
+    "company": "AlphaTech",
+    "position": "QA Engineer",
+    "tags": ["Selenium", "Automation", "Mid-Level"],
+    "salary": "45000-55000 USD",
+    "location": "Dublin, Ireland",
+    "workType": "Hybrid"
+  },
+  {
+    "id": 9,
+    "company": "Byte Solutions",
+    "position": "Cloud Architect",
+    "tags": ["Azure", "AWS", "Senior"],
+    "salary": "80000-95000 USD",
+    "location": "Sydney, Australia",
+    "workType": "Office"
+  },
+  {
+    "id": 10,
+    "company": "TechNova",
+    "position": "Frontend Developer",
+    "tags": ["Vue.js", "JavaScript", "Junior"],
+    "salary": "40000-50000 USD",
+    "location": "Barcelona, Spain",
+    "workType": "Remote"
+  }
+]

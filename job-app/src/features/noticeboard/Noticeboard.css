@@ -1,0 +1,170 @@
+.noticeboard-container{
+    width: 100%;
+    height: calc(100% - 140px);
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.noticeboard-container .noticeboard-list-wrapper{
+    width: 95%;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    overflow-y: auto;
+border-radius: 30px;
+}
+.noticeboard-container .noticeboard-list-wrapper .noticeboard-card{
+    width: 98%;
+   
+
+    background: rgba(50, 50, 51, 0.48);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(9.4px);
+    -webkit-backdrop-filter: blur(9.4px);
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+    border: 1px solid #3e3e3f;
+}
+
+.noticeboard-container .noticeboard-list-wrapper .noticeboard-card .noticeboard-card-content{
+    width: 90%;
+}
+.noticeboard-container .noticeboard-list-wrapper .noticeboard-card .noticeboard-card-content .noticeboard-card-content-title{
+    width: 100%;
+  display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+.noticeboard-container .noticeboard-list-wrapper .noticeboard-card .noticeboard-card-content 
+.noticeboard-card-content-title .noticeboard-card-content-title-company-name-position{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 25px;
+}
+.noticeboard-container .noticeboard-list-wrapper .noticeboard-card .noticeboard-card-content 
+.noticeboard-card-content-title .noticeboard-card-content-title-company-name-position h1{
+    font-size: 0.6em;
+    margin-top: 10px;
+    color: #F0EBD8;
+    font-weight: 200;
+}
+.noticeboard-container .noticeboard-list-wrapper .noticeboard-card .noticeboard-card-content 
+.noticeboard-card-content-title .noticeboard-card-content-title-company-name-position h2{
+     font-size: 0.9em;
+     margin-top: 15px;
+    font-weight: 200;
+    color: #F0EBD8;;
+}
+.noticeboard-container .noticeboard-list-wrapper .noticeboard-card 
+.noticeboard-card-content .noticeboard-card-content-title img{
+    width: 45px;
+    height: 45px;
+}
+.noticeboard-container .noticeboard-list-wrapper .noticeboard-card 
+.noticeboard-card-content  .noticeboard-card-content-job-info{
+    width: 100%;
+    font-family: 'Ubuntu', sans-serif;
+  
+    
+}
+.noticeboard-container .noticeboard-list-wrapper .noticeboard-card 
+.noticeboard-card-content .noticeboard-card-content-job-info p{
+    color: #5F3B7A;
+    font-weight: 500;
+}
+.noticeboard-container .noticeboard-list-wrapper .noticeboard-card 
+.noticeboard-card-content  .noticeboard-card-content-job-info .tag-names{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.noticeboard-container .noticeboard-list-wrapper .noticeboard-card 
+.noticeboard-card-content  .noticeboard-card-content-job-info .tag-names .tag{
+    padding:10px 25px;
+    color: #F0EBD8;
+    border: 1px solid #F0EBD8;
+    border-radius: 25px;
+    font-size: 0.8em;
+}
+.noticeboard-container .noticeboard-list-wrapper .noticeboard-card 
+.noticeboard-card-content  .noticeboard-card-content-job-info .noticeboard-card-content-job-info-bottom-section{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+.noticeboard-container .noticeboard-list-wrapper .noticeboard-card 
+.noticeboard-card-content  .noticeboard-card-content-job-info .noticeboard-card-content-job-info-bottom-section button{
+    padding: 15px 25px;
+    background-color: #5F3B7A;
+    color: #F0EBD8;
+    font-size: 25px;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+}
+.noticeboard-container .noticeboard-list-wrapper .noticeboard-card 
+.noticeboard-card-content  .noticeboard-card-content-job-info .noticeboard-card-content-job-info-bottom-section button h1{
+    font-size: 0.6em;
+    margin: 0;
+    font-family: 'Ubuntu', sans-serif;
+
+}
+.noticeboard-container .noticeboard-list-wrapper .noticeboard-card 
+.noticeboard-card-content  .noticeboard-card-content-job-info .noticeboard-card-content-job-info-bottom-section p{
+    color: #F0EBD8;
+    align-self: flex-end;
+    
+}
+@media only screen and (min-width:720px) and (max-width:1024px){
+    .noticeboard-container .noticeboard-list-wrapper{
+        width: 95%;
+        height: 95%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 20px;
+        align-items: center;
+        overflow-y: auto;
+        border-radius: 30px;
+    }
+    .noticeboard-container .noticeboard-list-wrapper .noticeboard-card{
+        width: 47%;
+    
+
+        background: rgba(50, 50, 51, 0.48);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(9.4px);
+        -webkit-backdrop-filter: blur(9.4px);
+        border-radius: 30px;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        align-items: center;
+        border: 1px solid #3e3e3f;
+    }
+}
+@media only screen and (min-width:1025px) and (max-width:1400px){
+    .noticeboard-container{
+        width: 80%;
+        height: calc(100% - 140px);
+            
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
