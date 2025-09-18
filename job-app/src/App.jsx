@@ -13,10 +13,11 @@ import Authentication from './features/authentication/authentication'
 import PrivateRoute from './components/PrivateRoute'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './firebase'
+import Profile from './features/user-profile/profile'
 function App() {
   const [user,setUser] = useState(null);
   const [isLoading, setLoading] = useState(true);
-
+  
   useEffect(()=>{
     const unsubscribe = onAuthStateChanged(auth, (currentUser) =>{
       setUser(currentUser)
@@ -39,10 +40,11 @@ function App() {
           >
             <Route path="/" element={<Noticeboard />} />
             <Route path="/notice-board" element={<Noticeboard />} />
+            <Route path='/profile/me' element={<Profile/>}/>
           </Route>
 
         
-          <Route path='/authentication' element={<Authentication setUser={setUser} setLoading={setLoading}/>}/>
+          <Route path='/authentication' element={<Authentication setUser={setUser} setLoading={setLoading} />}/>
 
         
       </Routes>

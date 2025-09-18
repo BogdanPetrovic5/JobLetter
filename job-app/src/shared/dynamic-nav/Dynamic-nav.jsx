@@ -8,18 +8,18 @@ import login from '../../assets/icons/login.png'
 import { useState } from 'react'
 import { auth } from '../../firebase'
 import { signOut } from 'firebase/auth'
-function DynamicNav(){
+import { Link } from 'react-router-dom'
+function DynamicNav({setLogoutDialog}){
     const[isLogged, setLoginStatus] = useState(false)
 
-    const logOut = async () =>{
-        try{
-           await signOut(auth)
-        }catch(error){
-            alert("Server error: ", error)
-        }
+    const openDialog = () =>{
+        setLogoutDialog(true);
     }
+ 
     return (
+       
         <div className="dynamic-nav">
+          
             <div className="dynamic-nav-wrapper">
                 <div className='logo'>
                      <img src={logo}/> <h1>JobLetter</h1>
@@ -32,16 +32,21 @@ function DynamicNav(){
                     <img src={filters} alt="" />
                     <p>Filters</p>
                 </div>
-                <div className='jobs tab'>
-                    <img src={job} alt="" />
-                    <p>Home</p>
-                </div>
+                <Link to='/notice-board'>
+                    <div className='jobs tab'>
+                        <img src={job} alt="" />
+                        <p>Home</p>
+                    </div>
+                </Link>
+               
+                <Link to='/profile/me'>
+                    <div className='profile tab' >
+                        <img src={profile} alt="" />
+                        <p>Profile</p>
+                    </div>
+                </Link>
                 
-                <div className='profile tab'>
-                    <img src={profile} alt="" />
-                    <p>Profile</p>
-                </div>
-                <div className='logout tab' onClick={()=>logOut()}>
+                <div className='logout tab' onClick={()=>openDialog()}>
                     <img src={login} alt="" />
                     <p>Logout</p>
                 </div>
