@@ -40,6 +40,7 @@
 @media only screen and (min-width:1025px){
     .dynamic-nav{
           background-color: #1e1f1f;
+           box-shadow: none;
         width: 20%;
         height: 100%;
         position: relative;

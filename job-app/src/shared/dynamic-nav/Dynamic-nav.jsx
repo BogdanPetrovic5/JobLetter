@@ -4,7 +4,20 @@ import profile from '../../assets/icons/profile.png'
 import search from  '../../assets/icons/search.png'
 import filters from '../../assets/icons/filters.png'
 import logo from '../../assets/icons/logo.png'
+import login from '../../assets/icons/login.png'
+import { useState } from 'react'
+import { auth } from '../../firebase'
+import { signOut } from 'firebase/auth'
 function DynamicNav(){
+    const[isLogged, setLoginStatus] = useState(false)
+
+    const logOut = async () =>{
+        try{
+           await signOut(auth)
+        }catch(error){
+            alert("Server error: ", error)
+        }
+    }
     return (
         <div className="dynamic-nav">
             <div className="dynamic-nav-wrapper">
@@ -23,11 +36,15 @@ function DynamicNav(){
                     <img src={job} alt="" />
                     <p>Home</p>
                 </div>
+                
                 <div className='profile tab'>
                     <img src={profile} alt="" />
                     <p>Profile</p>
                 </div>
-               
+                <div className='logout tab' onClick={()=>logOut()}>
+                    <img src={login} alt="" />
+                    <p>Logout</p>
+                </div>
             </div>
         </div>
     )

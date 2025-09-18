@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -7,24 +7,44 @@ import MobileNav from './shared/dynamic-nav/Dynamic-nav'
 import Noticeboard from './features/noticeboard/Noticeboard'
 import DynamicNav from './shared/dynamic-nav/Dynamic-nav'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Authentication from './features/authentication/authentication'
+
 import Home from './features/home'
+import Authentication from './features/authentication/authentication'
+import PrivateRoute from './components/PrivateRoute'
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from './firebase'
 function App() {
- 
+  const [user,setUser] = useState(null);
+  const [isLoading, setLoading] = useState(true);
 
+  useEffect(()=>{
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) =>{
+      setUser(currentUser)
+      setTimeout(()=>{
+        setLoading(false)
+      },1000)
+    })
+    return () => unsubscribe();
+  },[])
   return (
-       <Router>
-      <Routes>
-       
-        <Route element={<Home />}>
-          <Route path="/" element={<Noticeboard />} />
-          <Route path="/notice-board" element={<Noticeboard />} />
-        </Route>
+      <Router>
+        <Routes>
+        
+          <Route
+            element={
+              <PrivateRoute user={user} isLoading={isLoading}>
+                <Home />
+              </PrivateRoute>
+            }
+          >
+            <Route path="/" element={<Noticeboard />} />
+            <Route path="/notice-board" element={<Noticeboard />} />
+          </Route>
 
-       
-        <Route path='/authentication' element={<Authentication/>}>
+        
+          <Route path='/authentication' element={<Authentication setUser={setUser} setLoading={setLoading}/>}/>
 
-        </Route>
+        
       </Routes>
     </Router>
   )
