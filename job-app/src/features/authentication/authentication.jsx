@@ -62,7 +62,8 @@ function Authentication({setUser, setLoading}){
         e.preventDefault();
 
         if(validateCredentials()){
-           await proccessRegistration();
+            let isSuccess = await proccessRegistration();
+            if(!isSuccess) return
             setLoading(true)
             setTimeout(()=>{
                 setLoading(false)
@@ -86,19 +87,34 @@ function Authentication({setUser, setLoading}){
     }
 
     const proccessRegistration = async () =>{
-        const userCredentials = await createUserWithEmailAndPassword(auth, registerFormData.email, registerFormData.password);
-        const user = userCredentials.user
+        try{
+            const userCredentials = await createUserWithEmailAndPassword(auth, registerFormData.email, registerFormData.password);
+            const user = userCredentials.user
 
-        await setDoc(
-            doc(db, 'users', user.uid), 
-            {
-                firstname:registerFormData.firstname, 
-                surname:registerFormData.surname, 
-                email:registerFormData.email,
-                createdAt:serverTimestamp()
+            await setDoc(
+                doc(db, 'users', user.uid), 
+                {
+                    firstname:registerFormData.firstname, 
+                    surname:registerFormData.surname, 
+                    email:registerFormData.email,
+                    createdAt:serverTimestamp()
+                }
+            )
+            setUser(user)
+            return true;
+        }catch(error){
+            if (error.code === 'auth/email-already-in-use') {
+               const newError = {}
+               newError.userExists = "Email already in use!"
+               setErrors(newError)
+               
+            } else {
+                console.error('Registration error:', error);
+                
             }
-        )
-        setUser(user)
+            return false;
+        }
+       
     }
 
  
@@ -126,6 +142,7 @@ function Authentication({setUser, setLoading}){
                             <span>Email</span>
                             <input type="email" value={registerFormData.email} name='email' onChange={handleRegisterFormDataChange} />
                             <p>{errors.email}</p>
+                            <p>{errors.userExists}</p>
                         </div>
                         <div>
                             <span>Password</span>

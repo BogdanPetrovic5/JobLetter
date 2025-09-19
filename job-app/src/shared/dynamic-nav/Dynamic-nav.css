@@ -1,6 +1,6 @@
 .dynamic-nav{
-    width: 95%;
-    height: 70px;
+    width: 65%;
+    height: 50px;
     
     position: absolute;
     bottom:20px;
@@ -8,9 +8,9 @@
     transform: translateX(-50%);
     border-radius: 30px;
     border-radius: 30px;
-    background-color: #1e1f1f8e;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(6.7px);
+    background-color: #1e1f1f49;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.74);
+    backdrop-filter: blur(3.7px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,8 +35,11 @@
     display: none;
 }
 .dynamic-nav .dynamic-nav-wrapper img{
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
+}
+.dynamic-nav .dynamic-nav-wrapper .filters, .dynamic-nav .dynamic-nav-wrapper .search{
+    display: none;
 }
 @media only screen and (min-width:1025px){
     .dynamic-nav{
@@ -110,6 +113,9 @@
         gap: 20px;
         font-family: 'Ubuntu', sans-serif;
         font-size: 25px;
+    }
+    .dynamic-nav .dynamic-nav-wrapper a{
+        text-decoration: none;
     }
     .dynamic-nav .dynamic-nav-wrapper .tab p{
         display: block;

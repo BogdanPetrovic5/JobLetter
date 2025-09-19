@@ -107,6 +107,10 @@ border-radius: 30px;
     margin-bottom: 20px;
 }
 .noticeboard-container .noticeboard-list-wrapper .noticeboard-card 
+.noticeboard-card-content  .noticeboard-card-content-job-info .noticeboard-card-content-job-info-bottom-section a{
+    text-decoration: none;
+}
+.noticeboard-container .noticeboard-list-wrapper .noticeboard-card 
 .noticeboard-card-content  .noticeboard-card-content-job-info .noticeboard-card-content-job-info-bottom-section button{
     padding: 15px 25px;
     background-color: #5F3B7A;

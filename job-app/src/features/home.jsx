@@ -5,8 +5,12 @@ import { useState } from "react";
 import './home.css'
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
+import Form from "./new-application/Form";
+
 function Home(){
     const [logoutDialog, setLogoutDialog] = useState(false);
+    const [newFormTab, setNewFormTab] = useState(false)
+    const [selectedJob, setSelectedJob] = useState(null);
 
     const handleChoice = async (choice) =>{
       if(choice ==='yes'){
@@ -15,8 +19,16 @@ function Home(){
         setLogoutDialog(false)
       }
     }
+
+    const applyJob = (job) => {
+        setSelectedJob(job);
+        setNewFormTab(true);
+    } 
     return(
          <div className='container'>
+           {newFormTab && (
+                <Form setNewFormTab={setNewFormTab} job={selectedJob}></Form>
+            )}
           {logoutDialog && (
              <div className="logout-dialog">
                 <div className="logout-dialog-wrapper">
@@ -31,9 +43,9 @@ function Home(){
          
           <div className='container-content'> 
             <Header />
-            <Outlet></Outlet>
+            <Outlet context={{ newFormTab, setNewFormTab, selectedJob, applyJob }}></Outlet>
           </div>
-          <DynamicNav setLogoutDialog = {setLogoutDialog}/>
+          <DynamicNav setLogoutDialog = {setLogoutDialog} setNewFormTab={setNewFormTab} setSelectedJob={setSelectedJob}/>
         </div>
     )
 }

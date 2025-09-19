@@ -1,20 +1,29 @@
 import './Noticeboard.css'
 import company from '../../assets/icons/company.png'
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
+import { Link, useOutletContext } from 'react-router-dom';
+import Form from '../new-application/Form';
 function Noticeboard(){
     const [jobs, setJobs] = useState([]);
+    const outletContext = useOutletContext();
 
+    if (!outletContext) return null; 
+
+    const { applyJob } = outletContext;
     useEffect(()=>{
         fetch('./data/jobs.json')
         .then(response=>response.json())
         .then(data=>{
             setJobs(data)
-            console.log(data)
+          
+        }).catch((error)=>{
+            console.log("Error while loading JSON: ", error)
         })
     },[])
-
+  
     return(
         <div className='noticeboard-container'>
+           
             <div className='noticeboard-list-wrapper'>
 
                 {jobs.map((job,index)=>(
@@ -53,7 +62,7 @@ function Noticeboard(){
 
                             <div className='noticeboard-card-content-job-info-bottom-section'>
                                 <p>{job.location}</p>
-                                <button><h1>Apply!</h1></button>
+                                <button onClick={()=>applyJob(job)}><h1>Apply!</h1></button>
                               
                             </div>
                             

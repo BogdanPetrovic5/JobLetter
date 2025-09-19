@@ -9,11 +9,12 @@ import DynamicNav from './shared/dynamic-nav/Dynamic-nav'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Home from './features/home'
-import Authentication from './features/authentication/authentication'
+import Authentication from './features/authentication/Authentication'
 import PrivateRoute from './components/PrivateRoute'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './firebase'
 import Profile from './features/user-profile/profile'
+import Form from './features/new-application/Form'
 function App() {
   const [user,setUser] = useState(null);
   const [isLoading, setLoading] = useState(true);
@@ -40,7 +41,8 @@ function App() {
           >
             <Route path="/" element={<Noticeboard />} />
             <Route path="/notice-board" element={<Noticeboard />} />
-            <Route path='/profile/me' element={<Profile/>}/>
+            <Route path='/profile/me' element={<Profile user={user}/>}/>
+       
           </Route>
 
         

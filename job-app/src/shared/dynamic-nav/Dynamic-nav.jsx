@@ -6,16 +6,18 @@ import filters from '../../assets/icons/filters.png'
 import logo from '../../assets/icons/logo.png'
 import login from '../../assets/icons/login.png'
 import { useState } from 'react'
-import { auth } from '../../firebase'
-import { signOut } from 'firebase/auth'
-import { Link } from 'react-router-dom'
-function DynamicNav({setLogoutDialog}){
-    const[isLogged, setLoginStatus] = useState(false)
+import { Link, useOutletContext } from 'react-router-dom'
+import newapp from '../../assets/icons/new.png'
+function DynamicNav({setLogoutDialog,setNewFormTab,setSelectedJob}){
 
+  
     const openDialog = () =>{
         setLogoutDialog(true);
     }
- 
+    const openForm = () =>{ 
+        setSelectedJob(null)
+        setNewFormTab(true);
+    }
     return (
        
         <div className="dynamic-nav">
@@ -31,6 +33,10 @@ function DynamicNav({setLogoutDialog}){
                 <div className='filters tab'>
                     <img src={filters} alt="" />
                     <p>Filters</p>
+                </div>
+                 <div className='new tab' onClick={()=>openForm()}>
+                    <img src={newapp} alt="" />
+                    <p>New</p>
                 </div>
                 <Link to='/notice-board'>
                     <div className='jobs tab'>
