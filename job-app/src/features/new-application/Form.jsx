@@ -21,8 +21,14 @@ function Form({setNewFormTab, job}){
    
     const [isLoading, toggleLoading] = useState(false)
     const close = () =>{
-        setFormData(null)
-        setNewFormTab(false)
+        const doc = document.getElementById('form-container')
+        doc.classList.remove('animate__zoomIn')
+        doc.classList.add('animate__zoomOut')
+        setTimeout(()=>{
+            setFormData(null)
+            setNewFormTab(false)
+        }, 500)
+       
     }
     const handleChange = (e) =>{
        const {name, value} = e.target
@@ -106,8 +112,8 @@ function Form({setNewFormTab, job}){
                 </div>
             )}
           
-          {!isSubmitted && (
-             <div className="form-container" onSubmit={handleApplication}>
+        
+             <div className="form-container animate__animated animate__zoomIn animate__faster" id='form-container' onSubmit={handleApplication}>
                 <form className="form">
                     <div className="form-group">
                         <label htmlFor="name">Company Name</label>
@@ -135,10 +141,10 @@ function Form({setNewFormTab, job}){
                         <p>{errors.coverError}</p>
                     </div>
                     <button className="form-submit-btn" type="submit">Submit</button>
-                    <button className="form-exit-btn" onClick={()=>close()}>Cancle</button>
+                    <button className="form-exit-btn" type='button' onClick={()=>close()}>Cancle</button>
                 </form>
             </div>
-          )}
+          
            
         </div>
     )
