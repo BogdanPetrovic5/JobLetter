@@ -24,6 +24,15 @@
     align-items: center;
     position: absolute;
 }
+.form-wrapper .loading{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+}
+.form-wrapper .loading .loading-container{
+  background-color: #1111119d;
+}
 .form-container {
   width: 400px;
   background: linear-gradient(#212121, #212121) padding-box,

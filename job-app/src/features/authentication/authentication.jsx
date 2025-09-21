@@ -1,11 +1,8 @@
 import './Authentication.css'
 import authlogo from '../../assets/icons/auth.png'
 import { use, useState } from 'react'
-
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { auth,db } from "../../firebase";
-import {setDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import { login, register } from '../../core/services/firebaseService';
 function Authentication({setUser, setLoading}){
     const navigate = useNavigate();
     const [toggleForm, toggle] = useState(false)
@@ -35,21 +32,16 @@ function Authentication({setUser, setLoading}){
         })
     }
 
-    const handleLogin = (e) =>{
+    const handleLogin = async (e) =>{
         e.preventDefault();
         try{
-            console.log(loginFormData)
-            signInWithEmailAndPassword(auth, loginFormData.email, loginFormData.password)
-            .then(userCredentials =>{
-                 const loggedUser = userCredentials.user
-
-                setUser(loggedUser)
-                setLoading(true)
-                setTimeout(()=>{
-                    setLoading(false)
-                },1000)
-                navigate('/'); 
-            })
+            const loggedUser = await login(loginFormData)
+            setUser(loggedUser)
+            setLoading(true)
+            setTimeout(()=>{
+                setLoading(false)
+            },1000)
+            navigate('/'); 
            
         }catch(error){
             console.log("Login failed", error.code, error.message)
@@ -62,9 +54,10 @@ function Authentication({setUser, setLoading}){
         e.preventDefault();
 
         if(validateCredentials()){
+             setLoading(true)
             let isSuccess = await proccessRegistration();
             if(!isSuccess) return
-            setLoading(true)
+           
             setTimeout(()=>{
                 setLoading(false)
             },1000)
@@ -88,20 +81,9 @@ function Authentication({setUser, setLoading}){
 
     const proccessRegistration = async () =>{
         try{
-            const userCredentials = await createUserWithEmailAndPassword(auth, registerFormData.email, registerFormData.password);
-            const user = userCredentials.user
-
-            await setDoc(
-                doc(db, 'users', user.uid), 
-                {
-                    firstname:registerFormData.firstname, 
-                    surname:registerFormData.surname, 
-                    email:registerFormData.email,
-                    createdAt:serverTimestamp()
-                }
-            )
-            setUser(user)
-            return true;
+            let response = await register(registerFormData)
+            setUser(response.user)
+            return response.isSuccessfull;
         }catch(error){
             if (error.code === 'auth/email-already-in-use') {
                const newError = {}
