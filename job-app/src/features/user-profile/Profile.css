@@ -150,6 +150,21 @@
     
     margin-top: 10px;
 }
+.profile-container .profile-content .profile-applications .profile-applications-list .application-card .application-basic-info .no-response{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+.profile-container .profile-content .profile-applications .profile-applications-list .application-card .application-basic-info .no-response h1{
+  font-size: 1.5em;
+}
+.profile-container .profile-content .profile-applications .profile-applications-list .application-card .application-basic-info .no-response img{
+    width: 120px;
+    height: 120px;
+}
 .profile-container .profile-content .profile-applications .profile-applications-list .application-card .application-basic-info .company-position-wrapper{
     display: flex;
     flex-direction: row;

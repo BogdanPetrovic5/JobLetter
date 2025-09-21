@@ -4,7 +4,7 @@ import './Response.css'
 import { updateApplicationByCompanyAsnwer } from '../../../core/services/firebaseService';
 import { useApplications } from '../../../context/ApplicationsContext';
 import { Timestamp } from 'firebase/firestore';
-function Response({formData, closeNote}){
+function Response({formData, closeNote, setFormData}){
     const {addApplication} = useApplications();
     const [note,setNote] = useState("");
     const [choice, setChoice] = useState('yes')
@@ -29,7 +29,15 @@ function Response({formData, closeNote}){
                     response:note,
                     coverLetter:formData.cover
                 })
+              
                 setTimeout(()=>{
+                    setFormData({
+                        company: '',
+                        position: '',
+                        firstname: '',
+                        lastname: '',
+                        cover: ''
+                    })
                     closeNote(false);
                     setSavedStatus(false)
                 },2000)
@@ -42,10 +50,16 @@ function Response({formData, closeNote}){
                     date: Timestamp.now(),
                     status:"applied",
                     response:"",
-                     coverLetter:formData.cover
+                    coverLetter:formData.cover
             }) 
+            setFormData({
+                company: '',
+                position: '',
+                firstname: '',
+                lastname: '',
+                cover: ''
+            })
             closeNote(false)
-
         }
         
        

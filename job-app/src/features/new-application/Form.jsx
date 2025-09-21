@@ -51,6 +51,7 @@ function Form({setNewFormTab, job}){
             setTimeout(()=>{
                 setSubmitted(false)
                 toggleNote(true)
+                
             },2000)
 
            
@@ -91,7 +92,7 @@ function Form({setNewFormTab, job}){
             )}
             
             {note && (
-                 <Response formData={formData} closeNote={toggleNote}></Response>
+                 <Response formData={formData} closeNote={toggleNote} setFormData={setFormData}></Response>
             )}
            
             {isSubmitted && (  

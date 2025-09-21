@@ -2,7 +2,7 @@ import './Profile.css'
 import profileimg from '../../assets/icons/profileimg.png'
 import company from '../../assets/icons/company.png'
 import { useEffect, useState } from 'react'
-
+import noresponse from '../../assets/icons/no-response.png'
 
 import { useApplications } from '../../context/ApplicationsContext'
 import { fetchAllApplications, fetchUserProfile, updateApplicationByStatus } from '../../core/services/firebaseService'
@@ -189,7 +189,15 @@ function Profile({user}){
                                     <p>
                                         {application.response}
                                     </p>
+                                   
+                                   
                                 </div>
+                                 {!application.response && (
+                                        <div className='no-response'>
+                                            <img src={noresponse} />
+                                            <h1>No response saved!</h1>
+                                        </div>  
+                                    )}
                                 <div className='application-details'>
                                    
                                     <div className='application-details-status'>
