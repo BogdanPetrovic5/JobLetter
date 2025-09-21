@@ -2,14 +2,29 @@ import './Profile.css'
 import profileimg from '../../assets/icons/profileimg.png'
 import company from '../../assets/icons/company.png'
 import { useEffect, useState } from 'react'
-import { db } from '../../firebase'
-import { collection, doc, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore'
-import up from '../../assets/icons/up.png'
+
+
+import { useApplications } from '../../context/ApplicationsContext'
+import { fetchAllApplications, fetchUserProfile, updateApplicationByStatus } from '../../core/services/firebaseService'
+import filtersIcon from '../../assets/icons/filterprofile.png'
 function Profile({user}){
 
     const [userProfile, setUserProfile] = useState(null)
-     const [applications, setApplications] = useState([
-    ]);
+    
+    const {applications, setAllApplications} = useApplications()
+    const [applicationsCopy, setCopyApplications] = useState([])
+
+
+
+    const [filters, toggleFilters] = useState(false);
+    const [selectedFilterText, setFilterText] = useState('filters')
+
+    const filterOptions = [
+        "interviewed",
+        "applied",
+        "hired",
+        "all"
+    ]
 
     const changeStatus = (id) =>{
 
@@ -23,18 +38,16 @@ function Profile({user}){
             } : current
         ))
 
-        setApplications(modified)
+        setAllApplications(modified)
+        setCopyApplications(modified)
+
         const application = modified.find((app)=> app.appID === id)
         updateDb(id, application.status);
      
     }
     const updateDb = async (id, newStatus) =>{
         try{
-            const docRef = doc(db, 'applications', id);
-        
-            await updateDoc(docRef, {
-                status: newStatus
-            })
+            await updateApplicationByStatus(id, newStatus);
         }catch(error){
             console.log("Error while updating status of application: ", error);
         }
@@ -46,12 +59,9 @@ function Profile({user}){
          if (!user?.uid) return;
         const fetchProfile = async () =>{
             try{
-                const docRef = doc(db,'users', user.uid)
-                const docResponse = await getDoc(docRef);
-
+                const docResponse = await fetchUserProfile(user.uid)
                 if(docResponse.exists()){
                     setUserProfile(docResponse.data())
-                  
                 }else{
                     console.log("Error: No profile!")
                 }
@@ -66,25 +76,40 @@ function Profile({user}){
 
     useEffect(()=>{
         if(!user?.uid) return;
-        const fetchApplications = async () =>{
+        const initializeApplications = async () =>{
             try{
-                const request = query(collection(db, 'applications'), where("useruid", "==", user.uid));
-                const docRef = await getDocs(request)
-
-                const userApps = docRef.docs.map((doc) => ({
-                    appID:doc.id,
-                    ...doc.data()
-                }))
-                setApplications(userApps)
+                const userApps = await fetchAllApplications(user.uid)
+                userApps.sort((a,b) => b.date - a.date)
+                setAllApplications(userApps)
+                setCopyApplications(userApps)
                
             }catch(error){
                 console.log("Error while fetching applications: ", error);
             }
            
         }
-        fetchApplications();
-    },[user])
+        initializeApplications();
 
+         return () => {
+            setAllApplications([]);
+            setCopyApplications([]);
+        };
+    },[user])
+    const selectFilter = (index) =>{
+        setFilterText(filterOptions[index])
+        if(filterOptions[index] === 'all') {
+            setAllApplications(applicationsCopy)
+            toggleFilters(false)
+            return
+        }
+        setAllApplications(() =>{
+            
+            const sort = applicationsCopy.filter(a => a.status === filterOptions[index]);
+            return sort;
+        })
+        toggleFilters(false)
+    }
+    
     return(
         <div className='profile-container'>
             <div className='profile-content'>
@@ -97,24 +122,53 @@ function Profile({user}){
                 </div>
                 
                 <div className='profile-applications'>
-                    <h1>List of your applications</h1>
+                    <div className='profile-applications-title'>
+                        <h1>List of your applications</h1>
+                        <h1 onClick={()=>{
+
+                           
+                                toggleFilters(!filters)
+                           
+                            
+                        }}>{selectedFilterText} <img src={filtersIcon}/></h1>
+                        
+                            <div  className={`select ${ filters ? "grow" : "" }`}  id='select'>
+                                {filterOptions.map((option, index)=>(
+                                    <div className='option' key={index} onClick={()=>selectFilter(index)}>
+                                        {option}
+                                    </div>
+                                ))}
+                               
+                            </div>
+                        
+                      
+                    </div>
+                    
                     <div className='profile-applications-list'>
                         {applications?.map(application => (
                             <div className='application-card' key={application.appID}>
                                 <div className='application-basic-info'>
-                                    <div className='company-position'>
-                                        <h1>{application.company}</h1>
-                                        <h2>{application.position}</h2>
+                                    <div className='company-position-wrapper'>
+                                        <div className='company-position'>
+                                            <h1>{application.company}</h1>
+                                            <h2>{application.position}</h2>
+                                        </div>
+                                        <img src={company}/>
                                     </div>
-                                    <img src={company}/>
-                                </div>
-                                <div className='application-details'>
-                                    <h1>Cover letter</h1>
+                                    
+                                    <h1 className='cover-letter-title'>Cover letter</h1>
                                     <p className='cover-letter-content'>
                                         {application.coverLetter}
-                                        <br></br>
-                                        {application.coverLetter}
                                     </p>
+                                    <h1 className='response'>
+                                        Response
+                                    </h1>
+                                    <p>
+                                        {application.response}
+                                    </p>
+                                </div>
+                                <div className='application-details'>
+                                   
                                     <div className='application-details-status'>
                                         <p className='date'>
                                             Date applied: {application.date.toDate().toDateString()}

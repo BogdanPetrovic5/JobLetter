@@ -59,11 +59,59 @@
   
     font-size: 25px;
 }
+.profile-container .profile-content .profile-applications .profile-applications-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    
+}
+.profile-container .profile-content .profile-applications .profile-applications-title h1{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.profile-container .profile-content .profile-applications .profile-applications-title .select{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    gap: 10px;
+    bottom: -350%;
+    padding: 15px 15px;
+    right: 0;
+    font-size: 25px;
+    background-color: #2e2336;
+    border-radius: 15px;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.25s ease-in-out;
+}
+.profile-container .profile-content .profile-applications .profile-applications-title .select.grow{
+   transform: scaleY(1);
+
+}
+.profile-container .profile-content .profile-applications .profile-applications-title .select .option{
+    font-size: 0.65em;
+    font-family: 'Ubuntu', sans-serif;
+    color: #F0EBD8;
+    width: 100%;
+    text-align: center;
+}
 .profile-container .profile-content .profile-applications h1{
     font-size: 0.6em;
     color: #F0EBD8;
     font-family: 'Ubuntu', sans-serif;
+  
+
     align-self: flex-start;
+}
+.profile-container .profile-content .profile-applications h1 img{
+    width: 20px;
+    height: 20px;
 }
 .profile-container .profile-content .profile-applications .profile-applications-list{
     width: 100%;
@@ -87,7 +135,7 @@
     border-radius: 30px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 .profile-container .profile-content .profile-applications .profile-applications-list .application-card .application-basic-info{
@@ -95,14 +143,33 @@
     font-size: 25px;
     font-family: 'Ubuntu', sans-serif;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    
+    margin-top: 10px;
+}
+.profile-container .profile-content .profile-applications .profile-applications-list .application-card .application-basic-info .company-position-wrapper{
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
-    margin-top: 10px;
+    width: 100%;
 }
 .profile-container .profile-content .profile-applications .profile-applications-list .application-card .application-basic-info h1{
     font-size: 0.6em;
+}
+.profile-container .profile-content .profile-applications .profile-applications-list .application-card .application-basic-info h1.cover-letter-title{
+    color: #F0EBD8;
+    font-size: 0.6em;
+    font-weight: 400;
+    margin-bottom: 0;
+}
+.profile-container .profile-content .profile-applications .profile-applications-list .application-card .application-basic-info h1.response{
+    color: #F0EBD8;
+    font-size: 0.6em;
+    font-weight: 400;
+    margin-bottom: 0;
 }
 .profile-container .profile-content .profile-applications .profile-applications-list .application-card .application-basic-info h2{
     color: #F0EBD8;
@@ -130,11 +197,13 @@
     margin-bottom: 0;
 }
 .profile-container .profile-content .profile-applications 
-.profile-applications-list .application-card .application-details p.cover-letter-content{
+.profile-applications-list .application-card .application-basic-info p{
     font-size: 0.6em;
     color: #f0ebd87c;
     font-weight: 200;
-    
+   margin: 0;
+   margin-top: 5px;
+    white-space: pre-line;
 }
 .profile-container .profile-content .profile-applications 
 .profile-applications-list .application-card .application-details .application-details-status{
@@ -186,5 +255,14 @@
         background: #2E2336;
         background: linear-gradient(0deg, rgba(46, 35, 54, 1) 0%, rgba(30, 31, 31, 1) 100%);
 
+    }
+    .profile-container .profile-content .profile-applications .profile-applications-list{
+        flex-direction: row;
+        flex-wrap: wrap;
+        
+      
+    }
+    .profile-container .profile-content .profile-applications .profile-applications-list .application-card{
+        width: 48%;
     }
 }

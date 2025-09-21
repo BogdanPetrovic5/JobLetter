@@ -15,6 +15,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './firebase'
 import Profile from './features/user-profile/profile'
 import Form from './features/new-application/Form'
+import { ApplicationProvider } from './context/ApplicationsContext'
 function App() {
   const [user,setUser] = useState(null);
   const [isLoading, setLoading] = useState(true);
@@ -29,7 +30,8 @@ function App() {
     return () => unsubscribe();
   },[])
   return (
-      <Router>
+    <ApplicationProvider>
+       <Router>
         <Routes>
         
           <Route
@@ -51,6 +53,8 @@ function App() {
         
       </Routes>
     </Router>
+    </ApplicationProvider>
+     
   )
 }
 

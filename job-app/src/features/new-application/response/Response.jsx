@@ -26,7 +26,7 @@ function Response({formData, closeNote}){
                     appID:formData.docID,
                     date: Timestamp.now(),
                     status:"applied",
-                    response:formData.response,
+                    response:note,
                     coverLetter:formData.cover
                 })
                 setTimeout(()=>{
