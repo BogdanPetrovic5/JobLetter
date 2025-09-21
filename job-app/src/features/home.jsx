@@ -3,8 +3,6 @@ import Header from "../shared/header/Header";
 import DynamicNav from "../shared/dynamic-nav/Dynamic-nav";
 import { useState } from "react";
 import './home.css'
-import { signOut } from "firebase/auth";
-import { auth } from "../firebase";
 import Form from "./new-application/Form";
 import { signOutUser } from "../core/services/firebaseService";
 

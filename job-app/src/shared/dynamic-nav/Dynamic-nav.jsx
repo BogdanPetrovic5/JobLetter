@@ -1,12 +1,10 @@
 import './Dynamic-nav.css'
 import job from '../../assets/icons/job.png'
 import profile from '../../assets/icons/profile.png'
-import search from  '../../assets/icons/search.png'
-import filters from '../../assets/icons/filters.png'
 import logo from '../../assets/icons/logo.png'
 import login from '../../assets/icons/login.png'
-import { useState } from 'react'
-import { Link, useOutletContext } from 'react-router-dom'
+
+import { Link, } from 'react-router-dom'
 import newapp from '../../assets/icons/new.png'
 function DynamicNav({setLogoutDialog,setNewFormTab,setSelectedJob}){
 

@@ -36,9 +36,10 @@ function Authentication({setUser, setLoading}){
     const handleLogin = async (e) =>{
         e.preventDefault();
         try{
+            setLoading(true)
             const loggedUser = await loginUser(loginFormData)
             setUser(loggedUser)
-            setLoading(true)
+           
             setTimeout(()=>{
                 setLoading(false)
             },1000)
@@ -55,7 +56,7 @@ function Authentication({setUser, setLoading}){
         e.preventDefault();
 
         if(validateCredentials()){
-             setLoading(true)
+            setLoading(true)
             let isSuccess = await proccessRegistration();
             if(!isSuccess) return
            

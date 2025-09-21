@@ -1,8 +1,8 @@
 import './Noticeboard.css'
 import company from '../../assets/icons/company.png'
-import { use, useEffect, useState } from 'react';
-import { Link, useOutletContext } from 'react-router-dom';
-import Form from '../new-application/Form';
+import {useEffect, useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
+
 function Noticeboard(){
     const [jobs, setJobs] = useState([]);
     const outletContext = useOutletContext();
@@ -21,7 +21,7 @@ function Noticeboard(){
         }).catch((error)=>{
             console.log("Error while loading JSON: ", error)
         })
-        
+
     },[])
     const filteredJobs = jobs.filter((job)=>
         job.position.toLowerCase().includes(searchQuery.toLowerCase()) ||

@@ -262,7 +262,15 @@
         
       
     }
+   
+}
+@media only screen and (min-width:1124px) and (max-width:1500px){
     .profile-container .profile-content .profile-applications .profile-applications-list .application-card{
         width: 48%;
+    }
+}
+@media only screen and (min-width:1501px){
+    .profile-container .profile-content .profile-applications .profile-applications-list .application-card{
+        width: 32%;
     }
 }

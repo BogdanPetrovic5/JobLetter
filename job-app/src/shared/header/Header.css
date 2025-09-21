@@ -13,7 +13,7 @@
     height: 100%;
     display: flex;
     flex-direction: row;
-    gap: 20px;
+    gap: 10px;
 
 }
 .header-container .header-wrapper .logo-section{
@@ -41,7 +41,7 @@
         flex-direction: row;
         justify-content: left;
         align-items: center;
-        gap: 20px;
+        gap: 10px;
         font-size: 25px;
         font-family: 'Ubuntu', sans-serif;
 }
@@ -53,8 +53,13 @@
      .header-container .header-wrapper .nav-section .search{
         position: relative;
         display: flex;
-        justify-content: center;
+        flex-direction: row;
+        justify-content: left;
         align-items: center;
+        padding-left:30px;
+        padding-right: 30px;
+        background-color: #3e3e3f;;
+        border-radius: 50px;
      }
      .header-container .header-wrapper .nav-section .search img{
         position: absolute;
@@ -66,12 +71,73 @@
      .header-container .header-wrapper .nav-section .search input{
         border-radius: 50px;
         color: #F0EBD8;
-        background-color: #3e3e3f;
+        background-color: transparent;
         border: none;
         outline: none;
-        text-indent: 5px;
-        padding: 10px 50px;
+     
+        padding-top: 10px;
+        padding-bottom: 10px;
+        text-align: left;
+        width: 100%;
      }
+      .header-container .header-wrapper .nav-section .search input::placeholder{
+       
+        text-align: left;
+      }
+@media only screen and (min-width:400px) and (max-width:600px){
+     .header-container .header-wrapper .nav-section .search{
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        align-items: center;
+         padding-left: 30px;
+     }
+     .header-container .header-wrapper .nav-section .search img{
+        position: absolute;
+        left: 10px;
+        
+        width: 20px;
+        height: 20px;
+     }
+     .header-container .header-wrapper .nav-section .search input{
+        border-radius: 50px;
+        color: #F0EBD8;
+        
+        border: none;
+        outline: none;
+       
+        
+     }
+  
+}
+@media only screen and (min-width:601px) and (max-width:900px){
+   .header-container .header-wrapper .nav-section .search{
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        align-items: center;
+        padding-left: 30px;
+     }
+     .header-container .header-wrapper .nav-section .search img{
+        position: absolute;
+        left: 10px;
+        width: 20px;
+        height: 20px;
+     }
+     .header-container .header-wrapper .nav-section .search input{
+        border-radius: 50px;
+        color: #F0EBD8;
+        
+        border: none;
+        outline: none;
+        text-indent: 2px;
+       
+        text-align: left;
+     }
+  
+}
 @media only screen and (min-width:1025px){
    .header-container{
         width: 100%;
@@ -89,7 +155,9 @@
     .header-container .header-wrapper .logo-section{
         display: none;
     }
-   
+   .header-container .header-wrapper .nav-section{
+        width: 100%;
+   }
      .header-container .header-wrapper .nav-section h1{
         font-size: 0.9em;
         color: #F0EBD8;
@@ -97,9 +165,8 @@
      }
      .header-container .header-wrapper .nav-section .search{
         position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        padding-right: 80px;
+         padding-left: 35px;
      }
      .header-container .header-wrapper .nav-section .search img{
         position: absolute;
@@ -111,10 +178,20 @@
      .header-container .header-wrapper .nav-section .search input{
         border-radius: 50px;
         color: #F0EBD8;
-        background-color: #3e3e3f;
+      
         border: none;
         outline: none;
-        text-indent: 5px;
-        padding: 10px 50px;
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        text-align: left;
+        width: 100%;
+        max-width: 100%;
+       
+       
+     }
+     .header-container .header-wrapper .nav-section .search input::placeholder{
+        text-indent: 0;
+        
      }
 }

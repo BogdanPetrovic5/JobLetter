@@ -1,5 +1,5 @@
 .dynamic-nav{
-    width: 65%;
+    width: 90%;
     height: 50px;
     
     position: absolute;
@@ -40,6 +40,11 @@
 }
 .dynamic-nav .dynamic-nav-wrapper .filters, .dynamic-nav .dynamic-nav-wrapper .search{
     display: none;
+}
+@media only screen and (min-width:600px) and (max-width:1024px){
+     .dynamic-nav{
+        width: 50%;
+     }
 }
 @media only screen and (min-width:1025px){
     .dynamic-nav{
