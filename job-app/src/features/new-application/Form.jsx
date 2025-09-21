@@ -1,11 +1,25 @@
 import { useEffect, useState } from 'react'
 import './Form.css'
-import { addDoc, collection, serverTimestamp, setDoc } from 'firebase/firestore';
-import { auth, db } from '../../firebase';
-function Form({setNewFormTab, job, user}){
-    const [formData, setFormData] = useState(null)
+import Response from './response/Response';
+import { submitApplication } from '../../core/services/firebaseService';
+import { generateNote } from '../../core/services/openAIService';
+import Loading from '../../shared/loading/Loading';
+
+
+function Form({setNewFormTab, job}){
+    
+    const [formData, setFormData] = useState({
+        company: '',
+        position: '',
+        firstname: '',
+        lastname: '',
+        cover: ''
+    })
     const [errors, setErrors] = useState({});
-    const [isSubmitted, setSubmittet] = useState(false)
+    const [isSubmitted, setSubmitted] = useState(false)
+    const [note, toggleNote] = useState(false)
+   
+    const [isLoading, toggleLoading] = useState(false)
     const close = () =>{
         setFormData(null)
         setNewFormTab(false)
@@ -21,38 +35,44 @@ function Form({setNewFormTab, job, user}){
         e.preventDefault()
         if(!validateForm()) return;
         try{
-            const user = auth.currentUser;
-            await addDoc(collection(db, 'applications'),{
-                useruid:user.uid,
-                company:formData.company,
-                position:formData.position,
-                coverLetter:formData.cover,
-                date:serverTimestamp(),
-                status:"applied"
+          
+            const docID = await submitApplication(formData);
+            toggleLoading(true);
+            const response = await generateNote(formData.company, formData.position, formData.firstname)
+            setFormData({
+                ...formData,
+                docID:docID,
+                response:response
             })
-            setSubmittet(true);
+      
+            toggleLoading(false);
+          
+            setSubmitted(true);
             setTimeout(()=>{
-                setSubmittet(false)
+                setSubmitted(false)
+                toggleNote(true)
             },2000)
+
+           
         }catch(error){
             console.log("Error while submiting application: ", error)
         }
-       
-        
-
-        
+    
     }
+
     const validateForm = () =>{
         const newErrors = {}
         if(formData.company.trim() === "") newErrors.companyError = "Must enter company name!"
         if(formData.position.trim() === "") newErrors.poisitionError = "Must enter position name!"
+        if(formData.firstname.trim()==="") newErrors.firstnameError = "Must enter firstname!"
+        if(formData.lastname.trim()==="") newErrors.lastnameError = "Must enter lastname!"
         if(formData.cover.trim() === "") newErrors.coverError = "Must enter cover letter!"
         setErrors(newErrors)
         return Object.keys(newErrors).length === 0 
     }
     useEffect(() =>{
         if (!job) {
-            setFormData({ company: '', position: '', cover: '' });
+            setFormData({ company: '', position: '',  firstname:'', lastname:'', cover: '' });
             return;
         }
 
@@ -64,6 +84,16 @@ function Form({setNewFormTab, job, user}){
     },[job])
     return(
         <div className='form-wrapper'>
+            {isLoading && (
+                <div className='loading'>
+                    <Loading></Loading>
+                </div>
+            )}
+            
+            {note && (
+                 <Response formData={formData} closeNote={toggleNote}></Response>
+            )}
+           
             {isSubmitted && (  
                 <div className='form-submitted'>
                     <dotlottie-wc
@@ -75,8 +105,8 @@ function Form({setNewFormTab, job, user}){
                 </div>
             )}
           
-          
-            <div className="form-container" onSubmit={handleApplication}>
+          {!isSubmitted && (
+             <div className="form-container" onSubmit={handleApplication}>
                 <form className="form">
                     <div className="form-group">
                         <label htmlFor="name">Company Name</label>
@@ -88,6 +118,16 @@ function Form({setNewFormTab, job, user}){
                         <input type="text" id="email" name="position" required="" value={formData?.position || ""} onChange={handleChange}/>
                         <p>{errors.poisitionError}</p>
                     </div>
+                     <div className="form-group">
+                        <label htmlFor="firstname">Firstname</label>
+                        <input type="text" id="email" name="firstname" required="" value={formData?.firstname || ""} onChange={handleChange}/>
+                        <p>{errors.firstnameError}</p>
+                    </div>
+                     <div className="form-group">
+                        <label htmlFor="lastname">Lastname</label>
+                        <input type="text" id="email" name="lastname" required="" value={formData?.lastname || ""} onChange={handleChange}/>
+                        <p>{errors.lastnameError}</p>
+                    </div>
                     <div className="form-group">
                         <label htmlFor="textarea">Cover letter</label>
                         <textarea name="cover" id="textarea" rows="10" cols="50" required="" onChange={handleChange} value={formData?.cover || ""}></textarea>
@@ -97,6 +137,8 @@ function Form({setNewFormTab, job, user}){
                     <button className="form-exit-btn" onClick={()=>close()}>Cancle</button>
                 </form>
             </div>
+          )}
+           
         </div>
     )
 }
