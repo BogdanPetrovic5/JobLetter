@@ -1,10 +1,12 @@
 .noticeboard-container{
     width: 100%;
-    height: calc(100% - 140px);
-    background-color: #111111;
+    height: 100%;
+     background: #2E2336;
+        background: linear-gradient(0deg, rgba(46, 35, 54, 1) 0%, rgba(30, 31, 31, 1) 100%);
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 .noticeboard-container .noticeboard-list-wrapper{
     width: 95%;
@@ -15,6 +17,11 @@
     align-items: center;
     overflow-y: auto;
 border-radius: 30px;
+ box-sizing: border-box;
+ padding-bottom: 65px;
+}
+.noticeboard-container .noticeboard-list-wrapper::-webkit-scrollbar{
+    display: none;
 }
 .noticeboard-container .noticeboard-list-wrapper .noticeboard-card{
     width: 98%;

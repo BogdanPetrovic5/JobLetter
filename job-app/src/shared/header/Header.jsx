@@ -1,7 +1,9 @@
 import './Header.css'
 import logo from '../../assets/icons/logo.png'
 import search from '../../assets/icons/search.png'
-function Header(){
+function Header({searchQuery, setSearchQuery}){
+
+  
     return(
         <header className="header-container">
             <div className='header-wrapper'>
@@ -12,7 +14,7 @@ function Header(){
                     <h1>Find Your Dream Job And Apply! </h1>
                     <div className='search'>
                         <img src={search} alt="" />
-                        <input type="text" placeholder='Search applications or jobs!'/>
+                        <input type="text" value={searchQuery} onChange={(e)=>setSearchQuery(e.target.value)} placeholder='Search applications or jobs!'/>
                     </div>
                     
                 </nav>

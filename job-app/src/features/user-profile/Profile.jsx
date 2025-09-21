@@ -7,13 +7,18 @@ import { useEffect, useState } from 'react'
 import { useApplications } from '../../context/ApplicationsContext'
 import { fetchAllApplications, fetchUserProfile, updateApplicationByStatus } from '../../core/services/firebaseService'
 import filtersIcon from '../../assets/icons/filterprofile.png'
+import { useOutletContext } from 'react-router-dom'
 function Profile({user}){
+    const outletContext = useOutletContext();
 
+    if (!outletContext) return null;
     const [userProfile, setUserProfile] = useState(null)
     
     const {applications, setAllApplications} = useApplications()
-    const [applicationsCopy, setCopyApplications] = useState([])
+    const [filteredApplications, setFilteredApplications] = useState([])
 
+    
+    const {searchQuery} = outletContext;
 
 
     const [filters, toggleFilters] = useState(false);
@@ -26,37 +31,37 @@ function Profile({user}){
         "all"
     ]
 
+
     const changeStatus = (id) =>{
+        
+        const applicationToUpdate = applications.find((app)=>app.appID === id);
 
-        let modified =  applications.map((current) =>(
-            current.appID == id ? {
-                ...current,
-                status: 
-                    current.status === 'applied'
-                    ? "interviewed" : current.status === "interviewed"
+        const newStatus = applicationToUpdate.status === 'applied'
+                    ? "interviewed" : applicationToUpdate.status === "interviewed"
                     ? "hired" : "applied"
-            } : current
-        ))
-
-        setAllApplications(modified)
-        setCopyApplications(modified)
-
-        const application = modified.find((app)=> app.appID === id)
-        updateDb(id, application.status);
-     
+      
+        setAllApplications((application) => 
+            application.map(
+                app => app.appID === id ? {
+                    ...app,
+                    status:newStatus
+                } : app
+            )
+        )
+    
+        updateDb(id, newStatus);
     }
+
     const updateDb = async (id, newStatus) =>{
         try{
             await updateApplicationByStatus(id, newStatus);
         }catch(error){
             console.log("Error while updating status of application: ", error);
         }
-       
-
-
     }
+
     useEffect(()=>{
-         if (!user?.uid) return;
+        if (!user?.uid) return;
         const fetchProfile = async () =>{
             try{
                 const docResponse = await fetchUserProfile(user.uid)
@@ -81,30 +86,48 @@ function Profile({user}){
                 const userApps = await fetchAllApplications(user.uid)
                 userApps.sort((a,b) => b.date - a.date)
                 setAllApplications(userApps)
-                setCopyApplications(userApps)
+                setFilteredApplications(userApps)
                
             }catch(error){
                 console.log("Error while fetching applications: ", error);
             }
-           
         }
         initializeApplications();
-
          return () => {
             setAllApplications([]);
-            setCopyApplications([]);
+            setFilteredApplications([]);
         };
     },[user])
+
+    useEffect(()=>{
+        if (!applications) return;
+
+        let filtered = applications;
+
+        if (searchQuery.trim() !== "") {
+            filtered = filtered.filter(app =>
+                app.position.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                app.company.toLowerCase().includes(searchQuery.toLowerCase())
+            );
+        }
+        if (selectedFilterText !== "all" && selectedFilterText !== "filters") {
+            filtered = filtered.filter(app => app.status === selectedFilterText);
+        }
+        setFilteredApplications(filtered);
+    
+    }, [searchQuery, applications, selectedFilterText])
+
     const selectFilter = (index) =>{
         setFilterText(filterOptions[index])
         if(filterOptions[index] === 'all') {
-            setAllApplications(applicationsCopy)
+            setFilteredApplications(applications)
             toggleFilters(false)
+
             return
         }
-        setAllApplications(() =>{
+        setFilteredApplications(() =>{
+            const sort = applications.filter(a => a.status === filterOptions[index]);
             
-            const sort = applicationsCopy.filter(a => a.status === filterOptions[index]);
             return sort;
         })
         toggleFilters(false)
@@ -145,7 +168,7 @@ function Profile({user}){
                     </div>
                     
                     <div className='profile-applications-list'>
-                        {applications?.map(application => (
+                        {filteredApplications?.map(application => (
                             <div className='application-card' key={application.appID}>
                                 <div className='application-basic-info'>
                                     <div className='company-position-wrapper'>

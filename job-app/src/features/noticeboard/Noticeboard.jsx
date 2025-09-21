@@ -9,8 +9,10 @@ function Noticeboard(){
 
     if (!outletContext) return null; 
 
-    const { applyJob } = outletContext;
+    const { applyJob, searchQuery } = outletContext;
+    
     useEffect(()=>{
+        
         fetch('./data/jobs.json')
         .then(response=>response.json())
         .then(data=>{
@@ -19,14 +21,19 @@ function Noticeboard(){
         }).catch((error)=>{
             console.log("Error while loading JSON: ", error)
         })
+        
     },[])
-  
+    const filteredJobs = jobs.filter((job)=>
+        job.position.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        job.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        job.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+    )
     return(
         <div className='noticeboard-container'>
            
             <div className='noticeboard-list-wrapper'>
 
-                {jobs.map((job,index)=>(
+                {filteredJobs.map((job)=>(
                      <div className='noticeboard-card' key={job.id}>
                     <div className='noticeboard-card-content'>
                         <div className='noticeboard-card-content-title'>

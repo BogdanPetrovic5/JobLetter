@@ -5,7 +5,8 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    background-color: #111111;;
+     background: #2E2336;
+        background: linear-gradient(0deg, rgba(46, 35, 54, 1) 0%, rgba(30, 31, 31, 1) 100%);
 }
 .profile-container .profile-content{
     width: 90%;
@@ -252,8 +253,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background: #2E2336;
-        background: linear-gradient(0deg, rgba(46, 35, 54, 1) 0%, rgba(30, 31, 31, 1) 100%);
+       
 
     }
     .profile-container .profile-content .profile-applications .profile-applications-list{

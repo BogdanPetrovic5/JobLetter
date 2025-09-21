@@ -26,14 +26,7 @@ function DynamicNav({setLogoutDialog,setNewFormTab,setSelectedJob}){
                 <div className='logo'>
                      <img src={logo}/> <h1>JobLetter</h1>
                 </div>
-                <div className='search'>
-                    <img src={search} alt="" />
-                    <input placeholder='Search for jobs...'></input>
-                </div>
-                <div className='filters tab'>
-                    <img src={filters} alt="" />
-                    <p>Filters</p>
-                </div>
+               
                  <div className='new tab' onClick={()=>openForm()}>
                     <img src={newapp} alt="" />
                     <p>New</p>

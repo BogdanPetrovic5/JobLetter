@@ -1,20 +1,24 @@
 import { Outlet } from "react-router-dom";
-import Header from "../shared/header/header";
+import Header from "../shared/header/Header";
 import DynamicNav from "../shared/dynamic-nav/Dynamic-nav";
 import { useState } from "react";
 import './home.css'
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import Form from "./new-application/Form";
+import { signOutUser } from "../core/services/firebaseService";
 
 function Home(){
     const [logoutDialog, setLogoutDialog] = useState(false);
     const [newFormTab, setNewFormTab] = useState(false)
     const [selectedJob, setSelectedJob] = useState(null);
 
+    const [searchQuery, setSearchQuery] = useState("");
+
+
     const handleChoice = async (choice) =>{
       if(choice ==='yes'){
-        await signOut(auth)
+        await signOutUser();
       }else{
         setLogoutDialog(false)
       }
@@ -42,8 +46,8 @@ function Home(){
           )}
          
           <div className='container-content'> 
-            <Header />
-            <Outlet context={{ newFormTab, setNewFormTab, selectedJob, applyJob }}></Outlet>
+            <Header searchQuery= {searchQuery} setSearchQuery = {setSearchQuery} />
+            <Outlet context={{ newFormTab, setNewFormTab, selectedJob, applyJob, searchQuery }}></Outlet>
           </div>
           <DynamicNav setLogoutDialog = {setLogoutDialog} setNewFormTab={setNewFormTab} setSelectedJob={setSelectedJob}/>
         </div>

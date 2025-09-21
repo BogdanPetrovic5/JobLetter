@@ -2,11 +2,12 @@ import './Authentication.css'
 import authlogo from '../../assets/icons/auth.png'
 import { use, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { login, register } from '../../core/services/firebaseService';
+import {loginUser, registerUser } from '../../core/services/firebaseService';
 function Authentication({setUser, setLoading}){
     const navigate = useNavigate();
     const [toggleForm, toggle] = useState(false)
     const [errors, setErrors] = useState({});
+
     const [registerFormData, setRegisterFormData] = useState({
         firstname:"",
         surname:"",
@@ -35,7 +36,7 @@ function Authentication({setUser, setLoading}){
     const handleLogin = async (e) =>{
         e.preventDefault();
         try{
-            const loggedUser = await login(loginFormData)
+            const loggedUser = await loginUser(loginFormData)
             setUser(loggedUser)
             setLoading(true)
             setTimeout(()=>{
@@ -81,7 +82,7 @@ function Authentication({setUser, setLoading}){
 
     const proccessRegistration = async () =>{
         try{
-            let response = await register(registerFormData)
+            let response = await registerUser(registerFormData)
             setUser(response.user)
             return response.isSuccessfull;
         }catch(error){
